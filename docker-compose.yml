@@ -9,16 +9,25 @@ services:
       - "8000:80"
 
   tarantool1:
-    build: .
+    image: 'progaudi/tarantool:1.10'
+    command: tarantool /opt/tarantool/app.lua
+    volumes:
+      - ./app.lua:/opt/tarantool/app.lua
     environment:
       TARANTOOL_REPLICATION_SOURCE: "tarantool1,tarantool2,tarantool3"
 
   tarantool2:
-    build: .
+    image: 'progaudi/tarantool:1.10'
+    command: tarantool /opt/tarantool/app.lua
+    volumes:
+      - ./app.lua:/opt/tarantool/app.lua
     environment:
       TARANTOOL_REPLICATION_SOURCE: "tarantool1,tarantool2,tarantool3"
 
   tarantool3:
-    build: .
+    image: 'progaudi/tarantool:1.10'
+    command: tarantool /opt/tarantool/app.lua
+    volumes:
+      - ./app.lua:/opt/tarantool/app.lua
     environment:
       TARANTOOL_REPLICATION_SOURCE: "tarantool1,tarantool2,tarantool3"
